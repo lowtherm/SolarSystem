@@ -48,12 +48,15 @@ public class SolarSystem extends JFrame
 		renderingHints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 		renderingHints.put(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 		renderingHints.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB);
+		
+		//This runs an infinite loop to keep all of the objects in the solar system moving.
 		int i = 0;
 		while (true)
 		{
-
+			//This runs a loop to 360 to allow the planets to complete rotation before resetting the counter, we reset it to avoid an overflow with i.
 			if (i < 360)
 			{
+				//This instantiates all of the planets, moons and asteroids.
 				SolarObject sun = new SolarObject(0, 0, 50, "YELLOW");
 				drawSolarObject(sun);
 				
@@ -78,6 +81,7 @@ public class SolarSystem extends JFrame
 				Moon marsmoon2 = new Moon(16, 5*i + 50, 3, "WHITE", 160, 3*i + 156);
 				drawMoonAbout(marsmoon2);
 	            
+				//Array used for the asteroids to reduce code needed to instantiate them all.
 				Asteroid[][] asteroidBelt = new Asteroid[360][5];
 				for(int j=0; j<5; j++)
 				{
@@ -112,6 +116,7 @@ public class SolarSystem extends JFrame
 				Planet neptune = new Planet(370, i + 68, 18, "BLUE");
 				drawSolarObject(neptune);
 
+				//This was used to slow down the rotation of all of the planets.
 				finishedDrawing();
 				try{ Thread.sleep(45); } catch (Exception e) {}
 				i = i + 1;
@@ -197,7 +202,10 @@ public class SolarSystem extends JFrame
 	 * @param col the colour of this object, as a string. Case insentive. <p>One of: BLACK, BLUE, CYAN, DARK_GRAY, GRAY, GREEN, LIGHT_GRAY, 
 	 * MAGENTA, ORANGE, PINK, RED, WHITE, YELLOW. Alternatively, a 24 bit hexadecimal string representation of an RGB colour is also accepted, e.g. "#FF0000"</p>
 	 */
-	public void drawSolarObject(SolarObject newSolarObject)
+
+	 //This method now uses SolarObject as its only parameter and SolarObjects are a different class. This makes the program more secure(encapsulation) and easier to understand. 
+	 //I also made it private as you only need to access it in this class.
+	private void drawSolarObject(SolarObject newSolarObject)
 	{
 		Color colour = getColourFromString(newSolarObject.GetColour());
 
@@ -245,7 +253,7 @@ public class SolarSystem extends JFrame
 	 * @param centreOfRotationDistance the distance part of the polar co-ordinate about which this object orbits.
 	 * @param centreOfRotationAngle the angular part of the polar co-ordinate about which this object orbits.
 	 */
-	public void drawMoonAbout(Moon newMoon)
+	private void drawMoonAbout(Moon newMoon)
 	{
 		Color colour = getColourFromString(newMoon.GetColour());
 		double centrerads = Math.toRadians(newMoon.GetCentreOfRotationAngle());
@@ -280,8 +288,11 @@ public class SolarSystem extends JFrame
 			}
 		}
 	}
+    //I decided to reuse the drawMoonAbout method for drawAsteroid about. I could have made Asteroid a subclass of Moon however, 
+	//I didn't want to do this as moons and asteroids have different properties. This makes it easier for others to understand 
+	//and change the moon or asteroid class.
 
-	public void drawAsteroidAbout(Asteroid newAsteroid)
+	private void drawAsteroidAbout(Asteroid newAsteroid)
 	{
 		Color colour = getColourFromString(newAsteroid.GetColour());
 		double centrerads = Math.toRadians(newAsteroid.GetCentreOfRotationAngle());
@@ -325,7 +336,7 @@ public class SolarSystem extends JFrame
      * The method also waits for 20 milliseconds (1/50th of one second) and then
      * clears the screen.
 	 */
-	public void finishedDrawing()
+	private void finishedDrawing()
 	{
 		try
 		{

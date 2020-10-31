@@ -5,6 +5,8 @@ import java.awt.event.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+
+//I decided to make this its own class for encapsulation and so that I could subclass it with the different solar objects.
 public class SolarObject
 {
 	private double distance;
@@ -22,7 +24,7 @@ public class SolarObject
 		this.diameter = diameter;
 		this.col = col;
 	}
-
+    //I made get and set methods for all variables so that if anyone wants to add to the code they can alter these values without changing the code.
     public double GetDistance()
     {
         return distance;   
