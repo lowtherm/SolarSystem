@@ -9,10 +9,11 @@ import java.util.concurrent.TimeUnit;
 //I decided to make this its own class for encapsulation and so that I could subclass it with the different solar objects.
 public class SolarObject
 {
-	private double distance;
+    //Variables that don't change once set like colour, diameter and distance are set to final so they don't change.
+	private final double distance;
 	private double angle;
-	private double diameter;
-	private String col;
+	private final double diameter;
+	private final String col;
     private double x;
     private double y;
     
@@ -24,63 +25,48 @@ public class SolarObject
 		this.diameter = diameter;
 		this.col = col;
 	}
-    //I made get and set methods for all variables so that if anyone wants to add to the code they can alter these values without changing the code.
-    public double GetDistance()
+    //I made get and set methods for all non-final variables so that if anyone wants to add to the code they can alter these values without changing the code.
+    public final double GetDistance()
     {
         return distance;   
     }
 
-    public double GetAngle()
+    public final double GetAngle()
     {
         return angle;   
     }
 
-    public double GetDiameter()
+    public final double GetDiameter()
     {
         return diameter;   
     }
 
-    public String GetColour()
+    public final String GetColour()
     {
         return col;   
     }
 
-    public double GetX()
+    public final double GetX()
     {
         return x;   
     }
 
-    public double GetY()
+    public final double GetY()
     {
         return y;   
     }
 
-    public void SetDistance(double newDistance)
-    {
-        distance = newDistance;   
-    }
-
-    public void SetAngle(double newAngle)
+    public final void SetAngle(double newAngle)
     {
         angle = newAngle;   
     }
 
-    public void SetDiameter(double newDiameter)
-    {
-        diameter = newDiameter;   
-    }
-
-    public void SetColour(String newColour)
-    {
-        col = newColour;   
-    }
-
-    public void SetX(double newX)
+    public final void SetX(double newX)
     {
         x = newX;   
     }
 
-    public void SetY(double newY)
+    public final void SetY(double newY)
     {
         y = newY;   
     }

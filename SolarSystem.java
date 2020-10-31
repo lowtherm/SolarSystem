@@ -205,7 +205,7 @@ public class SolarSystem extends JFrame
 
 	 //This method now uses SolarObject as its only parameter and SolarObjects are a different class. This makes the program more secure(encapsulation) and easier to understand. 
 	 //I also made it private as you only need to access it in this class.
-	private void drawSolarObject(SolarObject newSolarObject)
+	private final void drawSolarObject(SolarObject newSolarObject)
 	{
 		Color colour = getColourFromString(newSolarObject.GetColour());
 
@@ -253,7 +253,7 @@ public class SolarSystem extends JFrame
 	 * @param centreOfRotationDistance the distance part of the polar co-ordinate about which this object orbits.
 	 * @param centreOfRotationAngle the angular part of the polar co-ordinate about which this object orbits.
 	 */
-	private void drawMoonAbout(Moon newMoon)
+	private final void drawMoonAbout(Moon newMoon)
 	{
 		Color colour = getColourFromString(newMoon.GetColour());
 		double centrerads = Math.toRadians(newMoon.GetCentreOfRotationAngle());
@@ -292,7 +292,7 @@ public class SolarSystem extends JFrame
 	//I didn't want to do this as moons and asteroids have different properties. This makes it easier for others to understand 
 	//and change the moon or asteroid class.
 
-	private void drawAsteroidAbout(Asteroid newAsteroid)
+	private final void drawAsteroidAbout(Asteroid newAsteroid)
 	{
 		Color colour = getColourFromString(newAsteroid.GetColour());
 		double centrerads = Math.toRadians(newAsteroid.GetCentreOfRotationAngle());
