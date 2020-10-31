@@ -71,9 +71,25 @@ public class SolarSystem extends JFrame
 				
 			    Planet mars = new Planet(160, 3*i + 156, 17, "RED");
 				drawSolarObject(mars);
-	            
 
+				Moon marsmoon1 = new Moon(12, 7*i, 2, "WHITE", 160, 3*i + 156);
+				drawSolarObjectAbout(marsmoon1);
+
+				Moon marsmoon2 = new Moon(16, 5*i + 50, 3, "WHITE", 160, 3*i + 156);
+				drawSolarObjectAbout(marsmoon2);
+	            
+				Asteroid[][] asteroidBelt = new Asteroid[360][5];
 				
+				for(int j=0; j<5; j++)
+				{
+				    for(int k=0; k<60; k++)
+				    {
+						asteroidBelt[k][j] = new Asteroid((double) (180 + 3*j), (double) (k^2 + 6*k + j^2 + 3*j + 5), (double) 1, "LIGHT_GRAY", (double) 0, (double) 0);
+						drawSolarObject(asteroidBelt[k][j]); 
+
+					}
+				}
+
 
 				Planet jupiter = new Planet(220, 2 * i, 35, "GRAY");
 				drawSolarObject(jupiter);
@@ -83,21 +99,17 @@ public class SolarSystem extends JFrame
 
 
 
+
+
+
 				Planet uranus = new Planet(340, i, 20, "CYAN");
 				drawSolarObject(uranus);
 
 				Planet neptune = new Planet(370, i + 68, 18, "BLUE");
 				drawSolarObject(neptune);
 
-				
-
-
-
-
-
-
-
 				finishedDrawing();
+				try{ Thread.sleep(45); } catch (Exception e) {}
 				i = i + 1;
 
 			}

@@ -27,12 +27,12 @@ public class Moon extends SolarObject
         return centreOfRotationAngle;   
     }
 
-    public void GetCentreOfRotationDistance(double newDistance)
+    public void SetCentreOfRotationDistance(double newDistance)
     {
         centreOfRotationDistance = newDistance;   
     }
 
-    public void GetCentreOfRotationAngle(double newAngle)
+    public void SetCentreOfRotationAngle(double newAngle)
     {
         centreOfRotationAngle = newAngle;   
     }
