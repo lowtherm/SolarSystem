@@ -67,29 +67,27 @@ public class SolarSystem extends JFrame
 				drawSolarObject(earth);
 	
 				Moon moon = new Moon(20, 7*i, 5, "WHITE", 120, 3*i);
-				drawSolarObjectAbout(moon);
+				drawMoonAbout(moon);
 				
 			    Planet mars = new Planet(160, 3*i + 156, 17, "RED");
 				drawSolarObject(mars);
 
 				Moon marsmoon1 = new Moon(12, 7*i, 2, "WHITE", 160, 3*i + 156);
-				drawSolarObjectAbout(marsmoon1);
+				drawMoonAbout(marsmoon1);
 
 				Moon marsmoon2 = new Moon(16, 5*i + 50, 3, "WHITE", 160, 3*i + 156);
-				drawSolarObjectAbout(marsmoon2);
+				drawMoonAbout(marsmoon2);
 	            
 				Asteroid[][] asteroidBelt = new Asteroid[360][5];
-				
 				for(int j=0; j<5; j++)
 				{
 				    for(int k=0; k<60; k++)
 				    {
-						asteroidBelt[k][j] = new Asteroid((double) (180 + 3*j), (double) (k^2 + 6*k + j^2 + 3*j + 5), (double) 1, "LIGHT_GRAY", (double) 0, (double) 0);
-						drawSolarObject(asteroidBelt[k][j]); 
+						asteroidBelt[k][j] = new Asteroid((double) (180 + 3*j), (double) (6*k + 2*j + 5 + i), (double) 1, "LIGHT_GRAY", (double) 0, (double) 0);
+						drawAsteroidAbout(asteroidBelt[k][j]); 
 
 					}
 				}
-
 
 				Planet jupiter = new Planet(220, 2 * i, 35, "GRAY");
 				drawSolarObject(jupiter);
@@ -97,10 +95,16 @@ public class SolarSystem extends JFrame
 				Planet saturn = new Planet(280, 2 * i, 30, "DARK_GRAY");
 				drawSolarObject(saturn);
 
+				Asteroid[][] saturnRing = new Asteroid[360][5];
+				for(int j=0; j<3; j++)
+				{
+				    for(int k=0; k<30; k++)
+				    {
+						saturnRing[k][j] = new Asteroid((double) (20 + 3 * j), (double) (12*k + 3*j + 5 + i), (double) 1, "LIGHT_GRAY", (double) 280, (double) 2 * i);
+						drawAsteroidAbout(saturnRing[k][j]); 
 
-
-
-
+					}
+				}
 
 				Planet uranus = new Planet(340, i, 20, "CYAN");
 				drawSolarObject(uranus);
@@ -241,7 +245,7 @@ public class SolarSystem extends JFrame
 	 * @param centreOfRotationDistance the distance part of the polar co-ordinate about which this object orbits.
 	 * @param centreOfRotationAngle the angular part of the polar co-ordinate about which this object orbits.
 	 */
-	public void drawSolarObjectAbout(Moon newMoon)
+	public void drawMoonAbout(Moon newMoon)
 	{
 		Color colour = getColourFromString(newMoon.GetColour());
 		double centrerads = Math.toRadians(newMoon.GetCentreOfRotationAngle());
@@ -276,6 +280,43 @@ public class SolarSystem extends JFrame
 			}
 		}
 	}
+
+	public void drawAsteroidAbout(Asteroid newAsteroid)
+	{
+		Color colour = getColourFromString(newAsteroid.GetColour());
+		double centrerads = Math.toRadians(newAsteroid.GetCentreOfRotationAngle());
+		double centreOfRotationX = (((double) width) / 2.0) + newAsteroid.GetCentreOfRotationDistance() * Math.sin(centrerads); 
+		double centreOfRotationY = (((double) height) / 2.0) + newAsteroid.GetCentreOfRotationDistance() * Math.cos(centrerads); 
+
+		double rads = Math.toRadians(newAsteroid.GetAngle());
+		newAsteroid.SetX((int) (centreOfRotationX + newAsteroid.GetDistance() * Math.sin(rads)) - newAsteroid.GetDiameter() / 2);
+		newAsteroid.SetY( (int) (centreOfRotationY + newAsteroid.GetDistance() * Math.cos(rads)) - newAsteroid.GetDiameter() / 2);
+
+		synchronized (this)
+		{
+			if (things.size() > 1000)
+			{
+				System.out.println("\n\n");
+				System.out.println(" ********************************************************* ");
+				System.out.println(" ***** Only 1000 Entities Supported per Solar System ***** ");
+				System.out.println(" ********************************************************* ");
+				System.out.println("\n\n");
+				System.out.println("If you are't trying to add this many things");
+				System.out.println("to your SolarSystem, then you have probably");
+				System.out.println("forgotten to call the finishedDrawing() method");
+				System.out.println("See the JavaDOC documentation for more information");
+				System.out.println("\n-- Joe");
+				System.out.println("\n\n");
+
+				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+			}
+			else
+			{
+				things.add(newAsteroid);
+			}
+		}
+	}
+	
 
 	/**
      * Updates the window to show all objects that have recently been drawn using
