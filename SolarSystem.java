@@ -57,16 +57,48 @@ public class SolarSystem extends JFrame
 				SolarObject sun = new SolarObject(0, 0, 50, "YELLOW");
 				drawSolarObject(sun);
 				
-				SolarObject earth = new SolarObject(100, i, 30, "BLUE");
+				Planet mercury = new Planet(50, 5*i, 7, "WHITE");
+				drawSolarObject(mercury);
+				
+				Planet venus = new Planet(80, 4*i + 50, 15, "ORANGE");
+				drawSolarObject(venus);
+				
+				Planet earth = new Planet(120, 3*i, 20, "BLUE");
 				drawSolarObject(earth);
 	
-				Moon moon = new Moon(100, i, 10, "WHITE", 10, i);
+				Moon moon = new Moon(20, 7*i, 5, "WHITE", 120, 3*i);
 				drawSolarObjectAbout(moon);
+				
+			    Planet mars = new Planet(160, 3*i + 156, 17, "RED");
+				drawSolarObject(mars);
+	            
+
+				
+
+				Planet jupiter = new Planet(220, 2 * i, 35, "GRAY");
+				drawSolarObject(jupiter);
+
+				Planet saturn = new Planet(280, 2 * i, 30, "DARK_GRAY");
+				drawSolarObject(saturn);
+
+
+
+				Planet uranus = new Planet(340, i, 20, "CYAN");
+				drawSolarObject(uranus);
+
+				Planet neptune = new Planet(370, i + 68, 18, "BLUE");
+				drawSolarObject(neptune);
+
+				
+
+
+
+
+
+
+
 				finishedDrawing();
 				i = i + 1;
-
-
-
 
 			}
 			else
@@ -100,7 +132,7 @@ public class SolarSystem extends JFrame
 				{
 					double rads = Math.toRadians(t.GetAngle());
 					g.setColor(getColourFromString(t.GetColour()));
-					g.fillOval( ((int) (((width / 2) + t.GetDistance() * Math.sin(rads)) - t.GetDiameter() / 2)), ((int) (((height / 2) + t.GetDistance() * Math.cos(rads)) - t.GetDiameter() / 2)), (int) t.GetDiameter(), (int) t.GetDiameter());
+					g.fillOval( (int) t.GetX(), (int) t.GetY(), (int) t.GetDiameter(), (int) t.GetDiameter());
 
 					//try{ Thread.sleep(0); } catch (Exception e) {} 
 				}
@@ -154,8 +186,8 @@ public class SolarSystem extends JFrame
 		Color colour = getColourFromString(newSolarObject.GetColour());
 
 		double rads = Math.toRadians(newSolarObject.GetAngle());
-		double x = (int) ((width / 2) + newSolarObject.GetDistance() * Math.sin(rads)) - newSolarObject.GetDiameter() / 2;
-		double y = (int) ((height / 2) + newSolarObject.GetDistance() * Math.cos(rads)) - newSolarObject.GetDiameter() / 2;
+		newSolarObject.SetX((int) ((width / 2) + newSolarObject.GetDistance() * Math.sin(rads)) - newSolarObject.GetDiameter() / 2);
+		newSolarObject.SetY((int) ((height / 2) + newSolarObject.GetDistance() * Math.cos(rads)) - newSolarObject.GetDiameter() / 2);
 
 		synchronized (this)
 		{
@@ -205,8 +237,8 @@ public class SolarSystem extends JFrame
 		double centreOfRotationY = (((double) height) / 2.0) + newMoon.GetCentreOfRotationDistance() * Math.cos(centrerads); 
 
 		double rads = Math.toRadians(newMoon.GetAngle());
-		double x = (int) (centreOfRotationX + newMoon.GetDistance() * Math.sin(rads)) - newMoon.GetDiameter() / 2;
-		double y = (int) (centreOfRotationY + newMoon.GetDistance() * Math.cos(rads)) - newMoon.GetDiameter() / 2;
+		newMoon.SetX((int) (centreOfRotationX + newMoon.GetDistance() * Math.sin(rads)) - newMoon.GetDiameter() / 2);
+		newMoon.SetY( (int) (centreOfRotationY + newMoon.GetDistance() * Math.cos(rads)) - newMoon.GetDiameter() / 2);
 
 		synchronized (this)
 		{

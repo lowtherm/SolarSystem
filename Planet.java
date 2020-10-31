@@ -7,7 +7,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Planet extends SolarObject
 {
-
+    public Planet(double distance, double angle, double diameter, String col)
+	{
+        super(distance, angle, diameter, col);
+	}
 
 
 }

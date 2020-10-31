@@ -7,56 +7,79 @@ import java.util.concurrent.TimeUnit;
 
 public class SolarObject
 {
-		private double distance;
-		private double angle;
-		private double diameter;
-		private String col;
+	private double distance;
+	private double angle;
+	private double diameter;
+	private String col;
+    private double x;
+    private double y;
+    
 
-		public SolarObject(double distance, double angle, double diameter, String col)
-		{
-			this.distance = distance;
-			this.angle = angle;
-			this.diameter = diameter;
-			this.col = col;
-		}
+	public SolarObject(double distance, double angle, double diameter, String col)
+	{
+		this.distance = distance;
+		this.angle = angle;
+		this.diameter = diameter;
+		this.col = col;
+	}
 
-        public double GetDistance()
-        {
-         return distance;   
-        }
+    public double GetDistance()
+    {
+        return distance;   
+    }
 
-        public double GetAngle()
-        {
-         return angle;   
-        }
+    public double GetAngle()
+    {
+        return angle;   
+    }
 
-        public double GetDiameter()
-        {
-         return diameter;   
-        }
+    public double GetDiameter()
+    {
+        return diameter;   
+    }
 
-        public String GetColour()
-        {
-         return col;   
-        }
+    public String GetColour()
+    {
+        return col;   
+    }
 
-        public void SetDistance(double newDistance)
-        {
-         distance = newDistance;   
-        }
+    public double GetX()
+    {
+        return x;   
+    }
 
-        public void SetAngle(double newAngle)
-        {
-         angle = newAngle;   
-        }
+    public double GetY()
+    {
+        return y;   
+    }
 
-        public void SetDiameter(double newDiameter)
-        {
-         diameter = newDiameter;   
-        }
+    public void SetDistance(double newDistance)
+    {
+        distance = newDistance;   
+    }
 
-        public void SetColour(String newColour)
-        {
-         col = newColour;   
-        }
+    public void SetAngle(double newAngle)
+    {
+        angle = newAngle;   
+    }
+
+    public void SetDiameter(double newDiameter)
+    {
+        diameter = newDiameter;   
+    }
+
+    public void SetColour(String newColour)
+    {
+        col = newColour;   
+    }
+
+    public void SetX(double newX)
+    {
+        x = newX;   
+    }
+
+    public void SetY(double newY)
+    {
+        y = newY;   
+    }
 }

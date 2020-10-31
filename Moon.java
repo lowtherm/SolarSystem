@@ -7,35 +7,35 @@ import java.util.concurrent.TimeUnit;
 
 public class Moon extends SolarObject
 {
-        private double centreOfRotationDistance;
-		private double centreOfRotationAngle;
+    private double centreOfRotationDistance;
+	private double centreOfRotationAngle;
 
-		public Moon(double distance, double angle, double diameter, String col, double centreOfRotationDistance, double centreOfRotationAngle)
-		{
-            super(distance, angle, diameter, col);
-			this.centreOfRotationDistance = centreOfRotationDistance;
-			this.centreOfRotationAngle = centreOfRotationAngle;
-		}
+	public Moon(double distance, double angle, double diameter, String col, double centreOfRotationDistance, double centreOfRotationAngle)
+	{
+        super(distance, angle, diameter, col);
+		this.centreOfRotationDistance = centreOfRotationDistance;
+		this.centreOfRotationAngle = centreOfRotationAngle;
+	}
         
-        public double GetCentreOfRotationDistance()
-        {
-         return centreOfRotationDistance;   
-        }
+    public double GetCentreOfRotationDistance()
+    {
+        return centreOfRotationDistance;   
+    }
 
-        public double GetCentreOfRotationAngle()
-        {
-         return centreOfRotationAngle;   
-        }
+    public double GetCentreOfRotationAngle()
+    {
+        return centreOfRotationAngle;   
+    }
 
-        public void GetCentreOfRotationDistance(double newDistance)
-        {
-         centreOfRotationDistance = newDistance;   
-        }
+    public void GetCentreOfRotationDistance(double newDistance)
+    {
+        centreOfRotationDistance = newDistance;   
+    }
 
-        public void GetCentreOfRotationAngle(double newAngle)
-        {
-         centreOfRotationAngle = newAngle;   
-        }
+    public void GetCentreOfRotationAngle(double newAngle)
+    {
+        centreOfRotationAngle = newAngle;   
+    }
 
 
 }

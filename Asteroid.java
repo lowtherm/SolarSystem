@@ -7,7 +7,33 @@ import java.util.concurrent.TimeUnit;
 
 public class Asteroid extends SolarObject
 {
+    private double centreOfRotationDistance;
+	private double centreOfRotationAngle;
 
+    public Asteroid(double distance, double angle, double diameter, String col, double centreOfRotationDistance, double centreOfRotationAngle)
+	{
+        super(distance, angle, diameter, col);
+        this.centreOfRotationDistance = centreOfRotationDistance;
+		this.centreOfRotationAngle = centreOfRotationAngle;
+	}
 
+    public double GetCentreOfRotationDistance()
+    {
+        return centreOfRotationDistance;   
+    }
 
+    public double GetCentreOfRotationAngle()
+    {
+        return centreOfRotationAngle;   
+    }
+
+    public void GetCentreOfRotationDistance(double newDistance)
+    {
+        centreOfRotationDistance = newDistance;   
+    }
+
+    public void GetCentreOfRotationAngle(double newAngle)
+    {
+        centreOfRotationAngle = newAngle;   
+    }
 }
