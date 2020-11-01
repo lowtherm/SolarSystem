@@ -70,16 +70,16 @@ public class SolarSystem extends JFrame
 				drawSolarObject(earth);
 	
 				Moon moon = new Moon(20, 7*i, 5, "WHITE", 120, 3*i);
-				drawMoonAbout(moon);
+				drawSolarObjectAbout(moon);
 				
 			    Planet mars = new Planet(160, 3*i + 156, 17, "RED");
 				drawSolarObject(mars);
 
-				Moon marsmoon1 = new Moon(12, 7*i, 2, "WHITE", 160, 3*i + 156);
-				drawMoonAbout(marsmoon1);
+				Moon marsMoon1 = new Moon(12, 7*i, 2, "WHITE", 160, 3*i + 156);
+				drawSolarObjectAbout(marsMoon1);
 
-				Moon marsmoon2 = new Moon(16, 5*i + 50, 3, "WHITE", 160, 3*i + 156);
-				drawMoonAbout(marsmoon2);
+				Moon marsMoon2 = new Moon(16, 5*i + 50, 3, "WHITE", 160, 3*i + 156);
+				drawSolarObjectAbout(marsMoon2);
 	            
 				//Array used for the asteroids to reduce code needed to instantiate them all.
 				Asteroid[][] asteroidBelt = new Asteroid[360][5];
@@ -88,7 +88,7 @@ public class SolarSystem extends JFrame
 				    for(int k=0; k<60; k++)
 				    {
 						asteroidBelt[k][j] = new Asteroid((double) (180 + 3*j), (double) (6*k + 2*j + 5 + i), (double) 1, "LIGHT_GRAY", (double) 0, (double) 0);
-						drawAsteroidAbout(asteroidBelt[k][j]); 
+						drawSolarObjectAbout(asteroidBelt[k][j]); 
 
 					}
 				}
@@ -105,7 +105,7 @@ public class SolarSystem extends JFrame
 				    for(int k=0; k<30; k++)
 				    {
 						saturnRing[k][j] = new Asteroid((double) (20 + 3 * j), (double) (12*k + 3*j + 5 + i), (double) 1, "LIGHT_GRAY", (double) 280, (double) 2 * i);
-						drawAsteroidAbout(saturnRing[k][j]); 
+						drawSolarObjectAbout(saturnRing[k][j]); 
 
 					}
 				}
@@ -253,16 +253,16 @@ public class SolarSystem extends JFrame
 	 * @param centreOfRotationDistance the distance part of the polar co-ordinate about which this object orbits.
 	 * @param centreOfRotationAngle the angular part of the polar co-ordinate about which this object orbits.
 	 */
-	private final void drawMoonAbout(Moon newMoon)
+	private final void drawSolarObjectAbout(SolarObjectAbout newSolarObjectAbout)
 	{
-		Color colour = getColourFromString(newMoon.GetColour());
-		double centrerads = Math.toRadians(newMoon.GetCentreOfRotationAngle());
-		double centreOfRotationX = (((double) width) / 2.0) + newMoon.GetCentreOfRotationDistance() * Math.sin(centrerads); 
-		double centreOfRotationY = (((double) height) / 2.0) + newMoon.GetCentreOfRotationDistance() * Math.cos(centrerads); 
+		Color colour = getColourFromString(newSolarObjectAbout.GetColour());
+		double centrerads = Math.toRadians(newSolarObjectAbout.GetCentreOfRotationAngle());
+		double centreOfRotationX = (((double) width) / 2.0) + newSolarObjectAbout.GetCentreOfRotationDistance() * Math.sin(centrerads); 
+		double centreOfRotationY = (((double) height) / 2.0) + newSolarObjectAbout.GetCentreOfRotationDistance() * Math.cos(centrerads); 
 
-		double rads = Math.toRadians(newMoon.GetAngle());
-		newMoon.SetX((int) (centreOfRotationX + newMoon.GetDistance() * Math.sin(rads)) - newMoon.GetDiameter() / 2);
-		newMoon.SetY( (int) (centreOfRotationY + newMoon.GetDistance() * Math.cos(rads)) - newMoon.GetDiameter() / 2);
+		double rads = Math.toRadians(newSolarObjectAbout.GetAngle());
+		newSolarObjectAbout.SetX((int) (centreOfRotationX + newSolarObjectAbout.GetDistance() * Math.sin(rads)) - newSolarObjectAbout.GetDiameter() / 2);
+		newSolarObjectAbout.SetY( (int) (centreOfRotationY + newSolarObjectAbout.GetDistance() * Math.cos(rads)) - newSolarObjectAbout.GetDiameter() / 2);
 
 		synchronized (this)
 		{
@@ -284,51 +284,11 @@ public class SolarSystem extends JFrame
 			}
 			else
 			{
-				things.add(newMoon);
+				things.add(newSolarObjectAbout);
 			}
 		}
 	}
-    //I decided to reuse the drawMoonAbout method for drawAsteroid about. I could have made Asteroid a subclass of Moon however, 
-	//I didn't want to do this as moons and asteroids have different properties. This makes it easier for others to understand 
-	//and change the moon or asteroid class.
-
-	private final void drawAsteroidAbout(Asteroid newAsteroid)
-	{
-		Color colour = getColourFromString(newAsteroid.GetColour());
-		double centrerads = Math.toRadians(newAsteroid.GetCentreOfRotationAngle());
-		double centreOfRotationX = (((double) width) / 2.0) + newAsteroid.GetCentreOfRotationDistance() * Math.sin(centrerads); 
-		double centreOfRotationY = (((double) height) / 2.0) + newAsteroid.GetCentreOfRotationDistance() * Math.cos(centrerads); 
-
-		double rads = Math.toRadians(newAsteroid.GetAngle());
-		newAsteroid.SetX((int) (centreOfRotationX + newAsteroid.GetDistance() * Math.sin(rads)) - newAsteroid.GetDiameter() / 2);
-		newAsteroid.SetY( (int) (centreOfRotationY + newAsteroid.GetDistance() * Math.cos(rads)) - newAsteroid.GetDiameter() / 2);
-
-		synchronized (this)
-		{
-			if (things.size() > 1000)
-			{
-				System.out.println("\n\n");
-				System.out.println(" ********************************************************* ");
-				System.out.println(" ***** Only 1000 Entities Supported per Solar System ***** ");
-				System.out.println(" ********************************************************* ");
-				System.out.println("\n\n");
-				System.out.println("If you are't trying to add this many things");
-				System.out.println("to your SolarSystem, then you have probably");
-				System.out.println("forgotten to call the finishedDrawing() method");
-				System.out.println("See the JavaDOC documentation for more information");
-				System.out.println("\n-- Joe");
-				System.out.println("\n\n");
-
-				this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-			}
-			else
-			{
-				things.add(newAsteroid);
-			}
-		}
-	}
-	
-
+    
 	/**
      * Updates the window to show all objects that have recently been drawn using
      * drawSolarObject() or drawSolarObjectAbout().
